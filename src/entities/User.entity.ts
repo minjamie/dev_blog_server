@@ -2,7 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity('DATA_User')
+@Entity('User')
 export class UserEtt {
   @PrimaryGeneratedColumn({ name: 'ID' })
   id: number;
@@ -33,9 +33,4 @@ export class UserEtt {
 
   @Column({ name: 'WITHDRAWAL_YN' })
   isWithdrawal: boolean;
-
-  @ApiProperty({ example: '서비스 기능 불편', description: '탈퇴사유' })
-  @IsString()
-  @Column({ name: 'WITHDRAWAL_REASON' })
-  withdrawalReason: string;
 }
