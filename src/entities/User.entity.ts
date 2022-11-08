@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { TeamEntity } from './Team.entity';
 
 @Entity('User')
-export class UserEtt {
+export class UserEntity {
   @PrimaryGeneratedColumn({ name: 'ID' })
   id: number;
 
@@ -14,8 +15,6 @@ export class UserEtt {
   email: string;
 
   @ApiProperty({ example: '갑돌이', description: '회원명' })
-  @IsString()
-  @IsNotEmpty()
   @Column({ name: 'USER_NAME' })
   name: string;
 
@@ -25,6 +24,17 @@ export class UserEtt {
   @Column({ name: 'PROFILE_IMAGE' })
   profileImg: string;
 
+  @ApiProperty({
+    example: '저는 플랫폼 개발팀 김민재입니다.',
+    description: '소개',
+  })
+  @Column({ name: 'INTRODUCE' })
+  introduce: string;
+
+  @ApiProperty({ example: 'D220201', description: '사원 번호' })
+  @Column({ name: 'EMPLOYEE_NUMBER' })
+  employeeNumber: string;
+
   @Column({ name: 'CREATE_DT' })
   createDate: Date;
 
@@ -33,4 +43,10 @@ export class UserEtt {
 
   @Column({ name: 'WITHDRAWAL_YN' })
   isWithdrawal: boolean;
+
+  @Column({ name: 'AUTH_YN' })
+  isAuth: boolean;
+
+  @OneToOne(() => TeamEntity, (team) => team.user)
+  team: TeamEntity;
 }
