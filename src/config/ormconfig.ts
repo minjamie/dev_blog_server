@@ -9,4 +9,5 @@ export const config: TypeOrmModuleOptions = {
   database: 'dev-blog',
   entities: ['dist/**/*.entity{ .ts,.js}'],
   synchronize: true,
+  logging: true,
 };

@@ -11,6 +11,7 @@ async function bootstrap() {
   useContainer(app.select(AppModule), { fallbackOnErrors: true });
   app.enableCors();
   app.useStaticAssets(join(__dirname, '..', 'public'));
+  app.setGlobalPrefix('api');
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,

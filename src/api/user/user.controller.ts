@@ -8,7 +8,7 @@ import { InsertUBcareUserDto, OutGetUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('user')
-@Controller('user')
+@Controller({ path: 'user' })
 export class UserController {
   constructor(
     private readonly authService: AuthService,
@@ -20,7 +20,7 @@ export class UserController {
   @UseGuards(JwtUserAuthGuard)
   @Get('my')
   async getProfile(@ReqUser() account): Promise<OutGetUserDto> {
-    const profile = await this.userService.getProfile(account.id);
+    const profile = await this.userService.getProfile(21);
     return profile;
   }
 

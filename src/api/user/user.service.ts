@@ -25,13 +25,15 @@ export class UserService {
 
   async insertUBcareUser(data: InsertUBcareUserDto) {
     const teamCheck = await this.userRepository.findOne({
-      where: { employeeNumber: data.employeeNumber },
-      relations: ['team'],
+      where: { employeeNumber: data.employeeNumber, teamType: data.teamType },
     });
 
-    if (teamCheck.team === data.name) {
-      const user = await this.userRepository.insert(data);
-      await this.mailService.sendMailToUser(teamCheck.email);
+    if (teamCheck) {
+      await this.mailService.sendMail(teamCheck.email);
+
+      await this.userRepository.update(teamCheck.id, {
+        isAuth: true,
+      });
     } else {
     }
   }

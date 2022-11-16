@@ -1,5 +1,4 @@
 import { IntersectionType, OmitType, PickType } from '@nestjs/swagger';
-import { TeamEntity } from 'src/entities/Team.entity';
 import { UserEntity } from 'src/entities/User.entity';
 
 export class OutGetUserDto extends OmitType(UserEntity, [
@@ -7,7 +6,7 @@ export class OutGetUserDto extends OmitType(UserEntity, [
   'updateDate',
 ]) {}
 
-export class InsertUBcareUserDto extends IntersectionType(
-  PickType(UserEntity, ['employeeNumber']),
-  PickType(TeamEntity, ['name']),
-) {}
+export class InsertUBcareUserDto extends PickType(UserEntity, [
+  'employeeNumber',
+  'teamType',
+]) {}

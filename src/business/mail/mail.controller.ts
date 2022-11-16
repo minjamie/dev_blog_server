@@ -2,7 +2,7 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Controller, Get, Query } from '@nestjs/common';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
-@Controller('mail')
+@Controller({ path: 'mail' })
 export class mailController {
   constructor(private mailService: MailerService) {}
 
